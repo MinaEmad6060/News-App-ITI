@@ -19,9 +19,6 @@ class FavouriteViewController: UIViewController, UITableViewDelegate, UITableVie
     var coreData = CoreDataAccessObject()
 
     var newsList: [New] = []
-
-    var appDelegate : AppDelegate?
-    var managedObjContext: NSManagedObjectContext?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +27,6 @@ class FavouriteViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         favTableView.delegate = self
         favTableView.dataSource = self
-        appDelegate = UIApplication.shared.delegate as? AppDelegate
-        managedObjContext = appDelegate?.persistentContainer.viewContext
         newsList=coreData.getAllNewsFromFavourite(favTableView: favTableView)
         isFavViewEmpty()
         favTableView.reloadData()

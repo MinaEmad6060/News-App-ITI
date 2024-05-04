@@ -20,9 +20,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     var newsListOnline: [New] = []
     var newsListOffline: [New] = []
     
-    var appDelegate : AppDelegate?
-    var managedObjContext: NSManagedObjectContext?
-    
     let coreData = CoreDataAccessObject()
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
@@ -45,8 +42,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewWillAppear(_ animated: Bool) {
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
-        appDelegate = UIApplication.shared.delegate as? AppDelegate
-        managedObjContext = appDelegate?.persistentContainer.viewContext
     }
 
     

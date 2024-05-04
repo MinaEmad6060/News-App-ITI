@@ -32,7 +32,6 @@ class CoreDataAccessObject{
             new.setValue(newsList[i].imageUrl, forKey: "imageUrl")
             new.setValue(newsList[i].url, forKey: "url")
             new.setValue(newsList[i].publishedAt, forKey: "publishedAt")
-            new.setValue(false, forKey: "isFavourite")
             do{
                 try managedObjContext?.save()
                 print("Insert")
@@ -102,7 +101,6 @@ class CoreDataAccessObject{
         news.setValue(new.imageUrl, forKey: "imageUrl")
         news.setValue(new.url, forKey: "url")
         news.setValue(new.publishedAt, forKey: "publishedAt")
-        news.setValue(true, forKey: "isFavourite")
         do{
             try managedObjContext?.save()
         }catch{
