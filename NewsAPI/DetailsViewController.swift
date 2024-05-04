@@ -14,8 +14,6 @@ class DetailsViewController: UIViewController {
     
     
     var new : New?
-    var appDelegate : AppDelegate?
-    var managedObjContext: NSManagedObjectContext?
     let coreData = CoreDataAccessObject()
     static var isFav = false
     
@@ -49,8 +47,6 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         if let unwrappedNew = new {
             authorDetailes.text = new?.author
             titleDetailes.text = new?.title
@@ -66,8 +62,8 @@ class DetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        appDelegate = UIApplication.shared.delegate as? AppDelegate
-        managedObjContext = appDelegate?.persistentContainer.viewContext
+        DetailsViewController.isFav = coreData.isNewInFavList(new: new)
+        print("DetailsViewController.isFav: \(DetailsViewController.isFav)")
         if DetailsViewController.isFav == false{
             let image = UIImage(systemName: "heart")
             btnFavImage.setImage(image, for: .normal)

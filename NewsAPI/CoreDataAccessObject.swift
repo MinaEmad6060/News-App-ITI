@@ -139,6 +139,23 @@ class CoreDataAccessObject{
         return newList
     }
     
+    func isNewInFavList(new: New?) -> Bool{
+        let fetchNew = NSFetchRequest<NSManagedObject>(entityName: "Favourites")
+        guard let new = new else{return false}
+        let myPredicate = NSPredicate(format: "title == %@", new.title ?? "")
+        fetchNew.predicate = myPredicate
+        do{
+            guard let news = try managedObjContext?.fetch(fetchNew) else{return false}
+            print("Get a New from favourits \(news.count)")
+            if(news.count > 0){
+                return true
+            }
+        }catch let error as NSError{
+            print("Can't Delete New\(error)")
+        }
+        return false
+    }
+    
     
     func deleteFromFavourite(new: New?){
         let fetchForDeletion = NSFetchRequest<NSManagedObject>(entityName: "Favourites")
